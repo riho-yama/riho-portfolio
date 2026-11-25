@@ -1,0 +1,69 @@
+<%
+    const serverURL = ''
+    const ENVType = process.env.NODE_ENV
+    rootURL = ENVType === 'production' ? serverURL : ''
+
+    const c = {
+        num: '02',
+        slug: 'marutatsu',
+        title: 'Hello Novelty!',
+        lead: '企業向けノベルティを手がける丸辰の、HP・採用サイト・特設サイトの全面リニューアル。私は特設サイト（トップ、記事、商品、ブランドなど7種類のページ）を担当し、日常的に増減する記事・商品・自社ブランドを、普段WordPressを使わない担当者が自分たちで更新できる形にしました。',
+        info: [
+            { label: 'Client', value: '丸辰' },
+            { label: 'Role', value: '特設サイトの静的コーディング（約8割） ／ WordPress構築 ／ 管理画面の入力設計と仕様書（主導し、上司のフィードバックで修正）' },
+            { label: 'Team', value: 'エンジニア2名（上司と私）' },
+            { label: 'Tech', value: 'WordPress ／ PHP ／ カスタム投稿 ／ ACF Pro' }
+        ],
+        media: '［画像］公開ページ',
+        imgPc: 'main-pc.jpg',
+        videoPc: 'main-pc.mp4',
+        videoSp: 'main-sp.mp4',
+        imgAlt: '丸辰の特設サイト「Hello Novelty!」のトップページ',
+        mediaSp: '［画像］公開ページ（スマホ）',
+        points: [
+            {
+                id: 'point1',
+                toc: '01 壊せない管理画面',
+                title: '入力する人が、<br class="sp">デザインを壊せない管理画面。',
+                body: `
+                    <p class="txt">中身（文章・画像・商品の追加と削除）は、すべて自由に更新できる。見た目と配置（レイアウト、文字数の目安、画像の比率）は、テンプレート側で固定する。この線引きで、管理画面を設計しました。</p>
+                    <p class="txt">入力欄を、見た目ではなく意味ごとに分けました（タイトル、画像、説明文など）。レイアウトはテンプレート側が決めるので、何を入力してもデザインは崩れません。自由入力の欄もEnterで改行できるようにし、HTMLを書く場面をなくしました。</p>`
+            },
+            {
+                id: 'point2',
+                toc: '02 説明書がいらない',
+                title: '説明書を開かなくても、<br class="sp">更新できる。',
+                body: `
+                    <p class="txt">各入力欄の説明に、文字数の目安や画像の幅を書きました。普段のWordPressの更新の感覚のまま、迷わず入力できます。そのうえで、更新できる全ページの内容を網羅したクライアント向けの仕様書も用意しました。</p>`
+            },
+            {
+                id: 'point3',
+                toc: '03 空でも崩れない',
+                title: '入力がなくても、<br class="sp">画面が崩れない。',
+                body: `
+                    <p class="txt">入力されていない項目は、その要素ごと表示しないようにしています。空の枠や余白だけが残ることがありません。</p>`
+            }
+        ],
+        result: `
+            <p class="txt">公開後も、クライアントの担当者が自分たちで問題なく更新を続けています。</p>`,
+        next: { slug: 'noraneko', title: 'ノラネコぐんだん コラボ' }
+    }
+-%>
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+<%- include('../_modules/_layout/_head.ejs', { title: c.title, description: c.lead, path: '/works/marutatsu.html' }) %>
+</head>
+<body>
+
+<%- include('../_modules/_layout/_header.ejs', { home: false }) %>
+
+<main>
+    <%- include('../_modules/_case/_case.ejs', { c }) %>
+</main>
+
+<%- include('../_modules/_layout/_footer.ejs', { contact: false }) %>
+
+<script src="<%= rootURL %>/assets/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+@use 'sass:math';
+
+// PCサイズ（920px以上）
+@mixin pc {
+    @media screen and (min-width: 920px) {
+        @content;
+    }
+}
+
+// スマホサイズ（919px以下）
+@mixin sp {
+    @media screen and (max-width: 919px) {
+        @content;
+    }
+}
+
+// 動きを減らす設定のとき
+@mixin reduced {
+    @media (prefers-reduced-motion: reduce) {
+        @content;
+    }
+}
+
+// SPは375pxを基準に可変
+// 375px幅のデザインでの px を、親要素に対する % にする
+@function spCalc($value) {
+    @return math.div($value, 375) * 100%;
+}
+
+// 375px幅のデザインでの文字サイズを vw にする
+// タブレット幅で大きくなりすぎないよう、1.4倍で止める
+@function spFont($value) {
+    @return min(#{math.div($value, 375) * 100}vw, #{$value * 1.4}px);
+}

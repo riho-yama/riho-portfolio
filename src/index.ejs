@@ -1,0 +1,27 @@
+<%
+    const serverURL = '' // サブディレクトリに置くときはここにパスを入れる
+    const ENVType = process.env.NODE_ENV
+    rootURL = ENVType === 'production' ? serverURL : ''
+-%>
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+<%- include('./_modules/_layout/_head.ejs', { title: '', description: '', path: '/' }) %>
+</head>
+<body>
+
+<%- include('./_modules/_layout/_header.ejs', { home: true }) %>
+
+<main>
+    <%- include('./_modules/_top/_hero.ejs') %>
+    <%- include('./_modules/_top/_works.ejs') %>
+    <%- include('./_modules/_top/_how.ejs') %>
+    <%- include('./_modules/_top/_about.ejs') %>
+    <%- include('./_modules/_top/_site.ejs') %>
+</main>
+
+<%- include('./_modules/_layout/_footer.ejs', { contact: true }) %>
+
+<script src="<%= rootURL %>/assets/js/index.js"></script>
+</body>
+</html>

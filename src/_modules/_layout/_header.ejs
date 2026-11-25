@@ -1,0 +1,26 @@
+<%
+    // home: トップページかどうか（ナビのリンク先を切り替える）
+    const base = home ? '' : rootURL + '/'
+-%>
+<header class="header" data-header>
+    <div class="header_inner">
+        <a href="<%= rootURL %>/" class="header_logo en">
+            <span class="header_logo-mark" aria-hidden="true"></span>Riho Yamamoto
+        </a>
+
+        <button type="button" class="header_menu-btn sp" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav" data-menu-button>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="header_nav en" id="nav" aria-label="メインナビゲーション" data-menu>
+            <ul>
+                <li><a href="<%= base %>#works">Works</a></li>
+                <li><a href="<%= base %>#how">How I work</a></li>
+                <li><a href="<%= base %>#about">About</a></li>
+                <li><a href="<%= base %>#site">This site</a></li>
+                <li><a href="<%= base %>#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

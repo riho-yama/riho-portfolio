@@ -1,0 +1,112 @@
+<%
+    // ケーススタディ（STEP 4 で microCMS から取得する予定のデータ）
+    const cases = [
+        {
+            num: '01',
+            slug: 'yamaasobu',
+            meta: 'Goldwin ／ 特設サイト ／ SANKOU! 掲載',
+            title: '山遊部',
+            point: '山が好きな人の目線で、<br class="sp">マップと天気の見せ方を工夫したサイト作り。',
+            media: '［動画］マップと天気の表示',
+            thumb: 'thumb.jpg',
+            thumbPc: 'thumb-pc.jpg',
+            main: true,
+            thumbAlt: 'Goldwin「山遊部」のトップページ'
+        },
+        {
+            num: '02',
+            slug: 'marutatsu',
+            meta: '丸辰 ／ WordPress構築',
+            title: 'Hello Novelty!',
+            point: 'WordPressに慣れていない人でも、<br class="sp">迷わず更新できる管理画面。',
+            media: '［画像］公開ページ',
+            thumb: 'thumb.jpg',
+            hoverVideo: 'thumb.mp4',
+            thumbAlt: '丸辰の特設サイト「Hello Novelty!」のトップページ'
+        },
+        {
+            num: '03',
+            slug: 'noraneko',
+            meta: 'アダストリア ／ studio CLIP ／ 特設サイト ／ SANKOU! 掲載',
+            title: 'ノラネコぐんだん コラボ',
+            point: '「顔が見える1秒」から考えた、<br class="sp">キャラクターのアニメーション実装。',
+            media: '［動画］見え隠れの動き',
+            thumb: 'thumb.jpg',
+            hoverVideo: 'thumb.mp4',
+            thumbAlt: 'studio CLIP × ノラネコぐんだん コラボサイトのトップページ'
+        }
+    ]
+
+    // その他の実績
+    const others = [
+        { client: 'Adastria ／ LOWRYS FARM', title: 'READY TO GO OUT', url: 'https://www.dot-st.com/lowrysfarm/cp/ready_to_go_out' },
+        { client: 'Adastria ／ LOWRYS FARM', title: 'KIDS 2026 SPRING', url: 'https://www.dot-st.com/lowrysfarm/cp/kids_2026spring' },
+        { client: 'BAYFLOW', title: 'Stay Coastal ’26 SUMMER', url: 'https://www.bayflow.jp/staycoastal_26summer/' },
+        { client: 'Goldwin ／ THE NORTH FACE', title: 'キッズ＆ベビー The Gift Guide', url: 'https://www.goldwin.co.jp/store/brand/tnf/kids/baby/gift' },
+        { client: 'THREE', title: 'Dreaming Moon ほか LP 5本以上', url: '' },
+        { client: 'into', title: 'Power of Moringa（Shopify）', url: 'https://into.organic/pages/into-power-of-moringa' }
+    ]
+-%>
+<section class="sec works" id="works">
+    <div class="inner">
+        <h2 class="sec_ttl"><span class="num">01</span>Works</h2>
+
+        <ul class="works_list">
+            <% cases.forEach((item) => { -%>
+            <li class="works_item<%= item.main ? ' works_item--main' : '' %>">
+                <a href="<%= rootURL %>/works/<%= item.slug %>.html" class="works_link">
+                    <div class="works_media<%= item.thumb ? '' : ' placeholder' %>"<%- item.hoverVideo ? ' data-hover-video' : '' %>>
+                        <span class="works_num en">CASE <%= item.num %></span>
+                        <% if (item.thumb) { -%>
+                        <picture>
+                            <% if (item.thumbPc) { -%>
+                            <source media="(min-width: 920px)" srcset="<%= rootURL %>/assets/img/works/<%= item.slug %>/<%= item.thumbPc %>" width="1600" height="800">
+                            <% } -%>
+                            <img src="<%= rootURL %>/assets/img/works/<%= item.slug %>/<%= item.thumb %>" alt="<%= item.thumbAlt %>" width="1200" height="900" loading="lazy">
+                        </picture>
+                        <% if (item.hoverVideo) { -%>
+                        <video src="<%= rootURL %>/assets/img/works/<%= item.slug %>/<%= item.hoverVideo %>" width="800" height="600" muted loop playsinline preload="none" aria-hidden="true"></video>
+                        <% } -%>
+                        <% } else { -%>
+                        <span><%= item.media %></span>
+                        <% } -%>
+                    </div>
+                    <div class="works_body">
+                        <div class="works_head">
+                            <p class="works_meta"><%= item.meta %></p>
+                            <h3 class="works_ttl heading"><%= item.title %></h3>
+                        </div>
+                        <p class="works_point"><%- item.point %></p>
+                    </div>
+                </a>
+            </li>
+            <% }) -%>
+        </ul>
+
+        <div class="others">
+            <p class="others_lead">ほかに、アパレルやコスメを中心に70本以上のLPを担当。うち約10件はディレクターからの指名、SANKOU! 掲載6件。</p>
+            <ul class="others_list">
+                <% others.forEach((item) => { -%>
+                <li class="others_item">
+                    <% if (item.url) { -%>
+                    <a href="<%= item.url %>" class="others_link" target="_blank" rel="noopener">
+                    <% } else { -%>
+                    <div class="others_link">
+                    <% } -%>
+                        <span class="others_client"><%= item.client %></span>
+                        <span class="others_ttl"><%= item.title %></span>
+                        <% if (item.url) { -%>
+                        <span class="others_arrow" aria-hidden="true">↗</span>
+                        <span class="visually_hidden">（新しいタブで開く）</span>
+                        <% } -%>
+                    <% if (item.url) { -%>
+                    </a>
+                    <% } else { -%>
+                    </div>
+                    <% } -%>
+                </li>
+                <% }) -%>
+            </ul>
+        </div>
+    </div>
+</section>

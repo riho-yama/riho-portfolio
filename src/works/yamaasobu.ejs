@@ -1,0 +1,92 @@
+<%
+    const serverURL = ''
+    const ENVType = process.env.NODE_ENV
+    rootURL = ENVType === 'production' ? serverURL : ''
+
+    const c = {
+        num: '01',
+        slug: 'yamaasobu',
+        title: '山遊部',
+        lead: '山で遊ぶ人が欲しいものを見つけられるカタログであり、山の知識も得られるGoldwinのコンテンツサイトです。',
+        info: [
+            { label: 'Client', value: 'Goldwin' },
+            { label: 'Role', value: 'コーディング ／ アニメーション ／ 公開' },
+            { label: 'Team', value: 'ディレクター1名 ／ デザイナー1名 ／ エンジニア1名（私）' },
+            { label: 'Tech', value: 'HTML ／ Sass ／ JavaScript ／ GSAP ／ Swiper ／ WeatherAPI.com' },
+            { label: 'Recognition', value: 'SANKOU! 掲載' }
+        ],
+        media: '［動画］マップと天気の表示',
+        imgPc: 'main-pc.jpg',
+        videoSp: 'main-sp.mp4',
+        imgAlt: 'Goldwin「山遊部」のトップページ',
+        mediaSp: '［動画］スマホで見たときの<br>マップと天気の表示',
+        points: [
+            {
+                id: 'point1',
+                toc: '01 マップの見せ方',
+                title: 'マップのポイントを、<br class="sp">どう伝えるか。',
+                body: `
+                    <p class="txt">最初は山のイラストを画面からはみ出すほど大きく表示し、横にスライドして見る形でした。しかし横スライドは、気づかない人や、わざわざ動かさない人もいます。そのためディレクターから作り変えの提案があり、チームで見せ方を検討しました。</p>
+                    <p class="txt">私からは、マップ上の各ポイントに見出しを常にアニメーションで表示しておく動きを提案。スマートフォンでは、地図上の数字とイラストだけでは、そこに何があるのか伝わりきらないと考えたからです。デザイナーからはポイントを下にスライダーで並べる案が出て、イラスト全体を見せたまま両方を実装しました。</p>
+                    <figure class="case_figure case_figure--tall">
+                        <video src="${rootURL}/assets/img/works/yamaasobu/map.mp4" poster="${rootURL}/assets/img/works/yamaasobu/map-poster.jpg" width="600" height="900" muted loop playsinline preload="metadata" aria-label="マップのポイントに見出しが表示され、下のスライダーと連動する動き" data-case-video></video>
+                        <figcaption>スマホで見たマップ。ポイントの見出しと、<span class="nowrap">下のスライダー。</span></figcaption>
+                    </figure>`
+            },
+            {
+                id: 'point2',
+                toc: '02 天気の提案',
+                title: '天気と気温で、<br class="sp">山への想像をふくらませる。',
+                body: `
+                    <p class="txt">山に登る人にとっては、装備と同じかそれ以上に、天気が大事です。カタログを見ながら山での1日を想像できるサイトにしたくて、デザイナー・ディレクターと「山に興味がある人が見て楽しいのは何か」を話していたときに、私からその日の天気を表示することを提案しました。</p>
+                    <p class="txt">その後、天気APIの無料プランで実現できるかを自分で調べたうえで、ディレクターからクライアントに提案してもらい、実現しました。マップ上の6エリア（東京・北海道・長野・山形・愛媛・熊本）の天気と気温を、ページを開いた時点の情報で表示しています。</p>
+                    <figure class="case_figure case_figure--wide">
+                        <video src="${rootURL}/assets/img/works/yamaasobu/weather.mp4" poster="${rootURL}/assets/img/works/yamaasobu/weather-poster.jpg" width="1000" height="562" muted loop playsinline preload="metadata" aria-label="各エリアの天気と気温が横に流れて表示される様子" data-case-video></video>
+                        <figcaption>エリアごとの天気と気温が、横に流れて表示される。</figcaption>
+                    </figure>`
+            },
+            {
+                id: 'point3',
+                toc: '03 天気表示の仕組み',
+                title: '天気を、正しく、<br class="sp">止まらず、軽く表示する。',
+                body: `
+                    <p class="txt">外部のAPIを使う以上、次の4つが懸念点でした。</p>
+                    <ul class="case_list">
+                        <li>天気の文字は「小雨」「Light rain」のように細かく分かれ、言語の設定でも変わる。文字で判定すると、アイコンがずれる</li>
+                        <li>6都市を順番に取得すると遅く、1都市の失敗で全体が止まる</li>
+                        <li>表示のたびにAPIを呼ぶと、アクセスが増えたときに無料プランの上限に達する</li>
+                        <li>外部のデータをそのままHTMLとして入れると、安全面のリスクがある</li>
+                    </ul>
+                    <p class="txt">そこで、次の仕組みで実装しています。</p>
+                    <dl class="case_defs">
+                        <div><dt>天気の番号で判定する</dt><dd>文字ではなく、天気ごとの番号（condition.code）で晴れ・雨・雪・曇りに振り分ける。小雨やにわか雨も、正しく雨のアイコンになる。</dd></div>
+                        <div><dt>6都市を同時に取得する</dt><dd>Promise.allではなくPromise.allSettledを選び、失敗した都市だけ空欄にして、ほかは表示する。</dd></div>
+                        <div><dt>ブラウザに30分保存する</dt><dd>取得結果をlocalStorageに保存し、その間はAPIを呼ばない。保存するのは全都市が取れたときだけ。保存が使えない環境でも、APIから取得して必ず表示する。</dd></div>
+                        <div><dt>安全な形で表示する</dt><dd>innerHTMLを使わず、要素を組み立ててtextContentで入れる。</dd></div>
+                    </dl>
+                    <p class="txt">都市の情報は1つのリストにまとめているので、都市を増やすときは1行足すだけで済みます。</p>`
+            }
+        ],
+        result: `
+            <p class="txt">公開後、1日のアクセス数が多く、サイトからのオンライン購入も多く確認できたと、クライアントから共有いただきました。</p>`,
+        next: { slug: 'marutatsu', title: 'Hello Novelty!' }
+    }
+-%>
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+<%- include('../_modules/_layout/_head.ejs', { title: c.title, description: c.lead, path: '/works/yamaasobu.html' }) %>
+</head>
+<body>
+
+<%- include('../_modules/_layout/_header.ejs', { home: false }) %>
+
+<main>
+    <%- include('../_modules/_case/_case.ejs', { c }) %>
+</main>
+
+<%- include('../_modules/_layout/_footer.ejs', { contact: false }) %>
+
+<script src="<%= rootURL %>/assets/js/index.js"></script>
+</body>
+</html>

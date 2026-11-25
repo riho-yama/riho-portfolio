@@ -1,0 +1,76 @@
+<%
+    // ケーススタディ共通の型
+    // c: { num, slug, imgPc?, imgSp?, imgAlt?, title, titleHtml, lead, info: [{label, value}], media, mediaSp, points: [{id, toc, title, body(html)}], result(html), next: {slug, title} }
+-%>
+<article class="case">
+    <div class="case_head">
+        <div class="inner">
+            <a href="<%= rootURL %>/#works" class="case_back">← Works 一覧へ</a>
+            <p class="case_num en">CASE <%= c.num %></p>
+            <h1 class="case_ttl heading"><%- c.titleHtml || c.title %></h1>
+            <p class="case_lead"><%= c.lead %></p>
+
+            <dl class="case_info">
+                <% c.info.forEach((row) => { -%>
+                <div class="case_info-row">
+                    <dt class="en"><%= row.label %></dt>
+                    <dd><%= row.value %></dd>
+                </div>
+                <% }) -%>
+            </dl>
+        </div>
+    </div>
+
+    <div class="case_visual">
+        <% if (c.videoPc) { -%>
+        <div class="case_visual-pc pc"><video src="<%= rootURL %>/assets/img/works/<%= c.slug %>/<%= c.videoPc %>" poster="<%= rootURL %>/assets/img/works/<%= c.slug %>/main-pc-poster.jpg" width="1600" height="800" muted playsinline preload="metadata" aria-label="<%= c.imgAlt %>（PCで開いたときの動き）" data-case-video></video></div>
+        <% } else if (c.imgPc) { -%>
+        <div class="case_visual-pc pc"><img src="<%= rootURL %>/assets/img/works/<%= c.slug %>/<%= c.imgPc %>" alt="<%= c.imgAlt %>" width="1600" height="800"></div>
+        <% } else { -%>
+        <div class="case_visual-pc placeholder pc"><%= c.media %></div>
+        <% } -%>
+        <% if (c.videoSp) { -%>
+        <div class="case_visual-sp sp"><video src="<%= rootURL %>/assets/img/works/<%= c.slug %>/<%= c.videoSp %>" poster="<%= rootURL %>/assets/img/works/<%= c.slug %>/main-sp-poster.jpg" width="720" height="1280" muted playsinline preload="metadata" aria-label="<%= c.imgAlt %>（スマホで開いたときの動き）" data-case-video></video></div>
+        <% } else if (c.imgSp) { -%>
+        <div class="case_visual-sp sp"><img src="<%= rootURL %>/assets/img/works/<%= c.slug %>/<%= c.imgSp %>" alt="<%= c.imgAlt %>（スマホ）" width="720" height="1280"></div>
+        <% } else { -%>
+        <div class="case_visual-sp placeholder sp"><%- c.mediaSp %></div>
+        <% } -%>
+    </div>
+
+    <div class="case_body inner">
+        <nav class="case_toc" aria-label="このページの目次" data-toc>
+            <p class="case_toc-label en">CONTENTS</p>
+            <ol>
+                <% c.points.forEach((p) => { -%>
+                <li><a href="#<%= p.id %>"><%= p.toc %></a></li>
+                <% }) -%>
+                <li><a href="#result">結果</a></li>
+            </ol>
+        </nav>
+
+        <div class="case_main">
+            <% c.points.forEach((p, i) => { -%>
+            <section class="case_point" id="<%= p.id %>" data-toc-target>
+                <p class="case_point-num en" aria-hidden="true"><%= ('0' + (i + 1)).slice(-2) %></p>
+                <h2 class="case_point-ttl heading"><%- p.title %></h2>
+                <%- p.body %>
+            </section>
+            <% }) -%>
+
+            <section class="case_result" id="result" data-toc-target>
+                <h2 class="case_result-ttl">結果</h2>
+                <%- c.result %>
+            </section>
+        </div>
+    </div>
+
+    <div class="case_next">
+        <div class="inner">
+            <a href="<%= rootURL %>/#works" class="case_next-back">← Works 一覧へ</a>
+            <a href="<%= rootURL %>/works/<%= c.next.slug %>.html" class="case_next-link">
+                <span class="en">NEXT</span><span><%= c.next.title %> <span aria-hidden="true">→</span></span>
+            </a>
+        </div>
+    </div>
+</article>

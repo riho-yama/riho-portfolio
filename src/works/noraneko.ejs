@@ -1,0 +1,92 @@
+<%
+    const serverURL = ''
+    const ENVType = process.env.NODE_ENV
+    rootURL = ENVType === 'production' ? serverURL : ''
+
+    const c = {
+        num: '03',
+        slug: 'noraneko',
+        title: 'ノラネコぐんだん コラボ',
+        titleHtml: 'ノラネコぐんだん<br class="sp"> コラボ',
+        lead: '絵本「ノラネコぐんだん」とstudio CLIPのコラボ商品の特設サイト。ファンが見て楽しめるように、キャラクターが本当にしそうな動きを探して実装しました。',
+        info: [
+            { label: 'Client', value: 'アダストリア ／ studio CLIP' },
+            { label: 'Role', value: '実装全般（デザインをもとに、着手から公開まで） ／ アニメーション設計' },
+            { label: 'Team', value: 'ディレクター1名 ／ デザイナー1名 ／ エンジニア1名（私）' },
+            { label: 'Tech', value: 'HTML ／ Sass ／ GSAP（Web版） ／ CSSアニメーション（アプリ版）' },
+            { label: 'Recognition', value: 'SANKOU! 掲載' }
+        ],
+        media: '［動画］サイト全体を通したスクロールの様子',
+        imgPc: 'main-pc.jpg',
+        videoPc: 'main-pc.mp4',
+        videoSp: 'main-sp.mp4',
+        imgAlt: 'studio CLIP × ノラネコぐんだん コラボサイトのトップページ',
+        mediaSp: '［動画］スマホで見たときの<br>スクロールの様子',
+        points: [
+            {
+                id: 'point1',
+                toc: '01 顔が見える1秒',
+                title: '動きより先に、<br class="sp">「顔が見える1秒」をつくる。',
+                body: `
+                    <p class="txt">ファンにとって何より大事なのは、動きよりも「彼らの顔を見られること」だと考えました。そこでどの動きも、顔が1秒以上はっきり見えるタイミングを必ず作っています。</p>
+                    <p class="txt">原作の絵本を何冊か読み、泥棒をする話が多いことから、みんなであやしく覗き込む動きを中心に、そこに不器用さが出るアニメーションを作成しました。</p>
+                    <ul class="case_gifs">
+                        <li><video src="${rootURL}/assets/img/works/noraneko/motion-1.mp4" poster="${rootURL}/assets/img/works/noraneko/motion-1-poster.jpg" width="600" height="600" muted loop playsinline preload="metadata" aria-label="画面の端から、ネコたちが順番に顔を出す動き" data-case-video></video></li>
+                        <li><video src="${rootURL}/assets/img/works/noraneko/motion-2.mp4" poster="${rootURL}/assets/img/works/noraneko/motion-2-poster.jpg" width="600" height="600" muted loop playsinline preload="metadata" aria-label="ボタンの裏から、ネコが顔を覗かせる動き" data-case-video></video></li>
+                        <li><video src="${rootURL}/assets/img/works/noraneko/motion-3.mp4" poster="${rootURL}/assets/img/works/noraneko/motion-3-poster.jpg" width="600" height="600" muted loop playsinline preload="metadata" aria-label="写真の角から、ネコが手を振って現れる動き" data-case-video></video></li>
+                    </ul>`
+            },
+            {
+                id: 'point2',
+                toc: '02 Webとアプリ',
+                title: '同じ表現を、Webとアプリで<br class="sp">別の方法で実装する。',
+                body: `
+                    <p class="txt">このサイトにはアプリ版があり、アプリではJavaScriptを読み込めませんでした。当初想定されていたモーダルについて、私からデザイナーに制約を説明し、アプリ版はJSの機能がいらないデザインにしてもらいました。同じブランドの案件が来た際は同様のことが起こるのでマニュアル化しました。</p>
+                    <p class="txt">見え隠れは、Web版ではスクロールに合わせて動かすためGSAPで実装。アプリ版ではCSSアニメーションに書き直し、スクロールに連動できない分は動きの種類を増やして補っています。</p>
+                    <ul class="case_cards">
+                        <li class="case_card">
+                            <p class="case_card-label en">WEB</p>
+                            <p class="case_card-ttl en">GSAP</p>
+                            <p class="case_card-txt">スクロール量に合わせて、ネコが顔を出す</p>
+                        </li>
+                        <li class="case_card">
+                            <p class="case_card-label en">APP</p>
+                            <p class="case_card-ttl en">CSS keyframes</p>
+                            <p class="case_card-txt">時間で動く6パターン。秒単位で顔が見える時間を確保</p>
+                        </li>
+                    </ul>`
+            }
+        ],
+        result: `
+            <ul class="case_stats">
+                <li>
+                    <p class="case_stats-num en">1,214<span>万回</span></p>
+                    <p class="case_stats-label">サイト公開を告知した公式Xの投稿の表示数</p>
+                </li>
+                <li>
+                    <p class="case_stats-num en">9,031<span>件</span></p>
+                    <p class="case_stats-label">同じ投稿のいいね数（2026年11月時点）</p>
+                </li>
+            </ul>
+            <p class="txt">引用投稿では、商品だけでなく「サイト自体がかわいい」「手の込んだページ」という声が多く届きました。クライアントからもキャラクターの動きを高く評価いただき、次のキャラクター案件もディレクターから指名をいただきました。</p>`,
+        next: { slug: 'yamaasobu', title: '山遊部' }
+    }
+-%>
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+<%- include('../_modules/_layout/_head.ejs', { title: c.title, description: c.lead, path: '/works/noraneko.html' }) %>
+</head>
+<body>
+
+<%- include('../_modules/_layout/_header.ejs', { home: false }) %>
+
+<main>
+    <%- include('../_modules/_case/_case.ejs', { c }) %>
+</main>
+
+<%- include('../_modules/_layout/_footer.ejs', { contact: false }) %>
+
+<script src="<%= rootURL %>/assets/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+@use './_mixin' as *;
+
+// 色
+$bg: #FBF6EE;
+$bg_sub: #F3E6D4;
+$white: #FFFFFF;
+$text: #2B2724;
+$text_sub: #4A433D;
+$gray: #6B625A;
+$line: #E4DACB;
+$accent: #EE7A2F;      // 名前の印・線・大きい数字など、大きく使うとき
+$accent_dark: #B04A0E; // 小さい文字で使うとき（背景との差を確保）
+
+// フォント
+$ja: 'Zen Kaku Gothic New', sans-serif;
+$en: 'DM Sans', 'Zen Kaku Gothic New', sans-serif;
+
+// 幅
+$inner_w: 1200px;
+
+body {
+    background: $bg;
+    color: $text;
+    font-family: $ja;
+    font-weight: 400;
+    font-feature-settings: "palt";
+    letter-spacing: 0.02em;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+
+    &.noscroll {
+        overflow: hidden;
+    }
+}
+
+a {
+    color: $text;
+    text-decoration: none;
+    transition: color .3s;
+
+    @media (hover: hover) {
+        &:hover {
+            color: $accent_dark;
+        }
+    }
+}
+
+:focus-visible {
+    outline: 2px solid $accent_dark;
+    outline-offset: 3px;
+}
+
+img,
+video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+// 表示の出し分け
+.sp {
+    display: block;
+
+    @include pc {
+        display: none;
+    }
+}
+
+br.sp {
+    display: inline;
+
+    @include pc {
+        display: none;
+    }
+}
+
+.pc {
+    display: none;
+
+    @include pc {
+        display: block;
+    }
+}
+
+br.pc {
+    display: none;
+
+    @include pc {
+        display: inline;
+    }
+}
+
+// 途中で改行させない語句
+.nowrap {
+    display: inline-block;
+}
+
+// 見出しの文字落ち対策（対応ブラウザのみ）
+.heading {
+    word-break: auto-phrase;
+    text-wrap: pretty;
+}
+
+// 英字
+.en {
+    font-family: $en;
+}
+
+// 読み上げ用（見た目には出さない）
+.visually_hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// コンテナ
+.inner {
+    width: spCalc(327);
+    margin: 0 auto;
+
+    @include pc {
+        width: auto;
+        max-width: $inner_w;
+        padding: 0 40px;
+    }
+}
+
+// セクション
+.sec {
+    border-top: 1px solid $line;
+    padding: spFont(72) 0;
+
+    @include pc {
+        padding: 120px 0;
+    }
+}
+
+// セクション見出し（01 Works など）
+.sec_ttl {
+    font-family: $en;
+    font-size: spFont(32);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    margin-bottom: spFont(40);
+
+    .num {
+        color: $accent_dark;
+        font-size: spFont(12);
+        letter-spacing: 0.12em;
+        margin-right: spFont(14);
+        vertical-align: middle;
+    }
+
+    @include pc {
+        font-size: 44px;
+        margin-bottom: 64px;
+
+        .num {
+            font-size: 14px;
+            margin-right: 20px;
+        }
+    }
+}
+
+// 画像・動画が入るまでの仮の枠
+.placeholder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    background: $bg_sub;
+    border: 1px solid $line;
+    color: $gray;
+    font-size: spFont(13);
+    text-align: center;
+    line-height: 1.7;
+
+    @include pc {
+        font-size: 15px;
+    }
+}
+
+// 本文
+.txt {
+    color: $text_sub;
+    font-size: spFont(14);
+    line-height: 2;
+
+    & + .txt {
+        margin-top: 1.3em;
+    }
+
+    @include pc {
+        font-size: 15px;
+    }
+}
+
+// 動きを減らす設定のとき
+@include reduced {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
