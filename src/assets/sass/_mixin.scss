@@ -29,6 +29,6 @@
 
 // 375px幅のデザインでの文字サイズを vw にする
 // タブレット幅で大きくなりすぎないよう、1.4倍で止める
-@function spFont($value) {
+@function spf($value) {
     @return min(#{math.div($value, 375) * 100}vw, #{$value * 1.4}px);
 }

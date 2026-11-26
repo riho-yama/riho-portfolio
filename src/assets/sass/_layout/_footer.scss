@@ -3,7 +3,7 @@
 
 .footer {
     background: c.$accent;
-    padding: spFont(72) 0 spFont(32);
+    padding: spf(72) 0 spf(32);
 
     @include pc {
         padding: 120px 0 48px;
@@ -25,10 +25,10 @@
 }
 
 .footer_ttl {
-    font-size: spFont(28);
+    font-size: spf(28);
     font-weight: 700;
     line-height: 1.6;
-    margin-bottom: spFont(36);
+    margin-bottom: spf(36);
 
     @include pc {
         font-size: 44px;
@@ -89,7 +89,7 @@
 .footer_bottom {
     display: flex;
     justify-content: space-between;
-    margin-top: spFont(72);
+    margin-top: spf(72);
     padding-top: 20px;
     border-top: 1px solid rgba(43, 39, 36, 0.3);
     font-size: 12px;

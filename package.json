@@ -5,8 +5,8 @@
   "main": "gulpfile.mjs",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=development gulp start",
-    "build": "NODE_ENV=production gulp build"
+    "start": "NODE_OPTIONS=--no-experimental-require-module NODE_ENV=development gulp start",
+    "build": "NODE_OPTIONS=--no-experimental-require-module NODE_ENV=production gulp build"
   },
   "keywords": [],
   "author": "Riho Yamamoto",

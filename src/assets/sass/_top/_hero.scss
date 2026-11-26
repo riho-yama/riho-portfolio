@@ -2,18 +2,17 @@
 @use '../_common' as c;
 
 .hero {
-    padding: spFont(88) 0 spFont(80);
-
+    padding: spf(88) 0 spf(80);
     @include pc {
-        padding: 160px 0 140px;
+        padding: pcFont(80) 0 pcFont(80);
     }
 }
 
 .hero_label {
-    font-size: spFont(11);
+    font-size: spf(11);
     letter-spacing: 0.12em;
     color: c.$gray;
-    margin-bottom: spFont(28);
+    margin-bottom: spf(28);
 
     @include pc {
         font-size: 13px;
@@ -22,7 +21,7 @@
 }
 
 .hero_ttl {
-    font-size: spFont(38);
+    font-size: spf(38);
     font-weight: 700;
     line-height: 1.45;
     letter-spacing: 0.04em;
@@ -38,9 +37,9 @@
 }
 
 .hero_lead {
-    margin-top: spFont(32);
+    margin-top: spf(32);
     color: c.$text_sub;
-    font-size: spFont(15);
+    font-size: spf(15);
     line-height: 2;
 
     @include pc {
@@ -51,8 +50,8 @@
 }
 
 .hero_name {
-    margin-top: spFont(28);
-    font-size: spFont(15);
+    margin-top: spf(28);
+    font-size: spf(15);
     font-weight: 500;
 
     .en {

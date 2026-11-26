@@ -11,7 +11,7 @@
 .about_photo {
     width: spCalc(240);
     aspect-ratio: 4 / 5;
-    margin-bottom: spFont(40);
+    margin-bottom: spf(40);
     overflow: hidden;
 
     img {
@@ -37,10 +37,10 @@
 }
 
 .about_ttl {
-    font-size: spFont(21);
+    font-size: spf(21);
     font-weight: 700;
     line-height: 1.7;
-    margin-bottom: spFont(24);
+    margin-bottom: spf(24);
 
     @include pc {
         font-size: 26px;
@@ -51,7 +51,7 @@
 
 // 趣味
 .hobby {
-    margin: spFont(36) 0;
+    margin: spf(36) 0;
     padding: 24px 20px;
     background: c.$white;
     border: 1px solid c.$line;
@@ -106,7 +106,7 @@
 
 // 経歴
 .career {
-    font-size: spFont(14);
+    font-size: spf(14);
     border-bottom: 1px solid c.$line;
 
     @include pc {

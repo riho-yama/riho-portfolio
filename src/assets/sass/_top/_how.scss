@@ -4,7 +4,7 @@
 .how_list {
     display: flex;
     flex-direction: column;
-    gap: spFont(40);
+    gap: spf(40);
 
     @include pc {
         display: grid;
@@ -28,7 +28,7 @@
 
 .how_num {
     color: c.$accent;
-    font-size: spFont(24);
+    font-size: spf(24);
     font-weight: 500;
     line-height: 1.3;
 
@@ -39,7 +39,7 @@
 }
 
 .how_ttl {
-    font-size: spFont(18);
+    font-size: spf(18);
     font-weight: 700;
     line-height: 1.6;
     margin-bottom: 8px;
@@ -52,7 +52,7 @@
 
 .how_txt {
     color: c.$text_sub;
-    font-size: spFont(14);
+    font-size: spf(14);
     line-height: 1.9;
 
     @include pc {

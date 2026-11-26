@@ -2,7 +2,7 @@
 @use '../_common' as c;
 
 .site_txt {
-    margin-bottom: spFont(40);
+    margin-bottom: spf(40);
 
     @include pc {
         max-width: 680px;
@@ -32,7 +32,7 @@
 
 .site_step-label {
     color: c.$gray;
-    font-size: spFont(11);
+    font-size: spf(11);
     letter-spacing: 0.08em;
     margin-bottom: 8px;
 
@@ -44,7 +44,7 @@
 }
 
 .site_step-ttl {
-    font-size: spFont(14);
+    font-size: spf(14);
     font-weight: 700;
     line-height: 1.7;
 
@@ -54,8 +54,8 @@
 }
 
 .site_link {
-    margin-top: spFont(28);
-    font-size: spFont(14);
+    margin-top: spf(28);
+    font-size: spf(14);
 
     a {
         text-decoration: underline;
